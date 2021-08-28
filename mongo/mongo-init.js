@@ -7,8 +7,6 @@ if(isMaster.ismaster){
     db2 = db.getSiblingDB('insight');
     db3 = db.getSiblingDB('keystone');
     db4 = db.getSiblingDB('bo');
-
-    print(' create user test in bo DB');
     db4.createUser(
         {
             user: "bo_admin",

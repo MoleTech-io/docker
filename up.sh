@@ -52,7 +52,7 @@ initRedisReplica(){
     echo "redis cluster is created"
 }
 
-statusMongoReplica(){
+startMongoReplica(){
     if grep -q "mongodb1" /etc/hosts; then
         echo "mongodb1 exists in /etc/hosts ok!"
     else
@@ -70,6 +70,23 @@ statusMongoReplica(){
     else
         echo "127.0.0.1 mongodb3" >> /etc/hosts;
     fi
+    mongo mongodb://mongodb1:25015  $DIR/mongo/replica-init.js
+    echo "init replica, please check status '$DIR'/mongo/replica-init.js"
+}
+
+initMongoUser(){
+    echo "waiting for mongodb replica connected ... ..."
+    mongo mongodb://mongodb1:25015 $DIR/mongo/mongo-init.js
+    mongo mongodb://mongodb2:25016 $DIR/mongo/mongo-init.js
+    echo "init mongo db, please check status"
+}
+
+startMongoWithKey(){
+    docker-compose -f $DIR/mongo/docker-compose-init.yml down
+    docker-compose -f $DIR/mongo/docker-compose.yml up -d
+}
+
+statusMongoReplica(){
     mongo mongodb://mongodb1:25015 $DIR/mongo/replica-status.js
     mongo mongodb://mongodb2:25016 $DIR/mongo/replica-status.js
 }
@@ -101,6 +118,11 @@ if [  "$1" = 'redis' ]  ; then
     exit
 fi
 
+if [  "$1" = 'status' ]  ; then
+    statusMongoReplica
+    exit
+fi
+
 if [  "$1" = 'all' ]  ; then
     initNetWork
     startMongo
@@ -108,7 +130,11 @@ if [  "$1" = 'all' ]  ; then
     sleep 2
     initRedisReplica
     sleep 8
+    startMongoReplica
     statusMongoReplica
+    sleep 20
+    initMongoUser
+    startMongoWithKey
     # startStone
     exit
 fi

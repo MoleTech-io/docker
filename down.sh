@@ -38,6 +38,30 @@ removeNetwork(){
     echo "remove docker network"
 }
 
+removeData() {
+    rm -rf $DIR/mongo/dat/
+    echo " remove datas from $DIR/mongo/dat/"
+    rm -rf $DIR/zookeeper/zoo1/
+    echo " remove datas from $DIR/zookeeper/zoo1/"
+    rm -rf $DIR/zookeeper/zoo2/
+    echo " remove datas from $DIR/zookeeper/zoo1/"
+    rm -rf $DIR/zookeeper/zoo3/
+    echo " remove datas from $DIR/zookeeper/zoo3/"
+
+    rm -rf $DIR/redis/dat/redis1/ 
+    echo " remove data from $DIR/redis/dat/redis1/"
+    rm -rf $DIR/redis/dat/redis2/ 
+    echo " remove data from $DIR/redis/dat/redis2/"
+    rm -rf $DIR/redis/dat/redis3/ 
+    echo " remove data from $DIR/redis/dat/redis3/"
+    rm -rf $DIR/redis/dat/redis4/ 
+    echo " remove data from $DIR/redis/dat/redis4/"
+    rm -rf $DIR/redis/dat/redis5/ 
+    echo " remove data from $DIR/redis/dat/redis5/"
+    rm -rf $DIR/redis/dat/redis6/ 
+    echo " remove data from $DIR/redis/dat/redis6/"
+}
+
 if [  "$1" = 'network' ]  ; then
     removeNetwork
     exit
@@ -58,10 +82,16 @@ if [  "$1" = 'stone' ]  ; then
     exit
 fi
 
+if [  "$1" = 'data' ]  ; then
+    removeData
+    exit
+fi
+
 if [  "$1" = 'all' ]  ; then
     removeRedis
     removeMongo
     removeStone
     removeNetwork
+    removeData
     exit
 fi
