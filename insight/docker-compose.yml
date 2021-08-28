@@ -1,0 +1,82 @@
+version: '3.4'
+services:
+  # proxy:
+  #   container_name: nginx_proxy
+  #   image: nginx
+  #   restart: always
+  #   ports:
+  #    - '80:80'
+  #   volumes:
+  #    - ./proxy.template:/etc/nginx/conf.d/proxy.template
+  #   links:
+  #    - insight
+  #   command: /bin/bash -c "envsubst '' < /etc/nginx/conf.d/proxy.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
+  #   networks:
+  # insight:
+  #   container_name: insight
+  #   image: insight:latest
+  #   volumes:
+  #     - "./log/insight:/data/log"
+  #   command: [sh, -c, npm start]
+  #   ports:
+  #     - "1388:1388"
+  #   restart: always
+  #   networks:
+  #     insight_service_net:
+  #       ipv4_address: 172.28.0.18
+  #     wallet_service_net:
+  #       ipv4_address: 172.26.0.18
+  #     insight_redis_net:
+  #       ipv4_address: 172.29.0.18
+  #     insight_socket_net:
+  #       ipv4_address: 172.30.0.18
+  #   links:
+  #     - future
+  #   environment:
+  #     NODE_ENV: test
+  stone:
+    container_name: stone
+    image: stone:latest
+    volumes:
+      - "../../log/stone:/data/log"
+    ports:
+      - "3838:3838"
+    restart: always
+    networks:
+      - wallet_internal
+    environment:
+      NODE_ENV: test
+  socketio:
+    container_name: socketio
+    image: socketio:latest
+    volumes:
+      - "../../log/socketio:/data/log"
+    ports:
+      - "38385:38385"
+    restart: on-failure
+    networks:
+      - wallet_internal
+    environment:
+      NODE_ENV: test
+  future:
+    container_name: future
+    image: future:latest
+    volumes:
+      - "../../log/future:/data/log"
+    ports:
+      - "1380:1380"
+    restart: on-failure
+    networks:
+      - wallet_internal
+      - wallet_service
+    links:
+      - stone
+      - socketio
+    environment:
+      NODE_ENV: test
+networks:
+  wallet_internal:
+    external: true
+  wallet_service:
+    external: true
+

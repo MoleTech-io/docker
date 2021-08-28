@@ -1,0 +1,94 @@
+version: '3.4'
+services:
+  redis1:
+    container_name: redis1
+    hostname: reids1
+    image: "redis:latest"
+    volumes:
+        # - ../redis/replica.sh:/data/replica.sh 
+        - ../redis/dat/redis1:/data
+        - ../redis/redis.conf:/usr/local/etc/redis/redis.conf
+    ports:
+      - "7000:7000"
+    command: redis-server /usr/local/etc/redis/redis.conf
+    # environment:
+    #   - REDIS_PASSWORD=56795c3ba4b4cb0e131cf588c512e244
+    networks:
+      - wallet_internal
+  redis2:
+    container_name: redis2
+    hostname: reids2
+    image: "redis:latest"
+    volumes: 
+        - ../redis/dat/redis2:/data
+        - ../redis/redis.conf:/usr/local/etc/redis/redis.conf
+    ports:
+      - "7001:7000"
+    command: redis-server /usr/local/etc/redis/redis.conf
+    # environment:
+    #   - REDIS_PASSWORD=56795c3ba4b4cb0e131cf588c512e244
+    networks:
+      - wallet_internal
+  redis3:
+    hostname: reids3
+    container_name: redis3
+    image: "redis:latest"
+    volumes: 
+        - ../redis/dat/redis3:/data
+        - ../redis/redis.conf:/usr/local/etc/redis/redis.conf
+    ports:
+      - "7002:7000"
+    command: redis-server /usr/local/etc/redis/redis.conf
+    # environment:
+    #   - REDIS_PASSWORD=56795c3ba4b4cb0e131cf588c512e244
+    networks:
+      - wallet_internal
+  redis4:
+    container_name: redis4
+    hostname: reids4
+    image: "redis:latest"
+    volumes: 
+        - ../redis/dat/redis4:/data
+        - ../redis/redis.conf:/usr/local/etc/redis/redis.conf
+    ports:
+      - "7003:7000"
+    command: redis-server /usr/local/etc/redis/redis.conf
+    # environment:
+    #   - REDIS_PASSWORD=56795c3ba4b4cb0e131cf588c512e244
+    networks:
+      - wallet_internal
+  redis5:
+    container_name: redis5
+    hostname: reids5
+    image: "redis:latest"
+    volumes: 
+        - ../redis/dat/redis5:/data
+        - ../redis/redis.conf:/usr/local/etc/redis/redis.conf
+    ports:
+      - "7004:7000"
+    command: redis-server /usr/local/etc/redis/redis.conf
+    # environment:
+    #   - REDIS_PASSWORD=56795c3ba4b4cb0e131cf588c512e244
+    networks:
+      - wallet_internal
+  redis6:
+    container_name: redis6
+    hostname: reids6
+    image: "redis:latest"
+    volumes: 
+        - ../redis/dat/redis6:/data
+        - ../redis/redis.conf:/usr/local/etc/redis/redis.conf
+    ports:
+      - "7005:7000"
+    command: redis-server /usr/local/etc/redis/redis.conf
+    # environment:
+    #   - REDIS_PASSWORD=56795c3ba4b4cb0e131cf588c512e244
+    networks:
+      - wallet_internal
+networks:
+  wallet_internal:
+    external: true
+
+
+# docker inspect -f '{{ (index .NetworkSettings.Networks "wallet_internal").IPAddress }}' redis1
+# redis-cli --cluster create 10.0.9.83:7000 10.0.9.84:7000 10.0.9.81:7000 10.0.9.78:7000 10.0.9.80:7000 10.0.9.82:7000 --cluster-replicas 1

@@ -1,0 +1,47 @@
+version: '3.4'
+services:
+  mongodb1:
+    image: mongo:4.2.3-bionic
+    hostname: mongodb1
+    container_name: mongodb1
+    command: --port 25015 --keyFile /data/keyfile.key --bind_ip_all --replSet main 
+    ports: 
+      - '25015:25015'
+    # environment:
+    #   MONGO_INITDB_ROOT_USERNAME: admin
+    #   MONGO_INITDB_ROOT_PASSWORD: admin
+    volumes:
+      - ../mongo/keyfile.key:/data/keyfile.key:ro 
+      - ../mongo/dat/primary:/data/db:rw
+    networks:
+      - wallet_internal
+    restart: on-failure
+  mongodb2:
+    image: mongo:4.2.3-bionic
+    container_name: mongodb2
+    hostname: mongodb2
+    command: --port 25016 --keyFile /data/keyfile.key --bind_ip_all --replSet main
+    ports: 
+      - '25016:25016'
+    volumes:
+      - ../mongo/keyfile.key:/data/keyfile.key:ro 
+      - ../mongo/dat/secondary:/data/db:rw
+    networks:
+      - wallet_internal
+    restart: on-failure
+  mongodb3:
+    image: mongo:4.2.3-bionic
+    container_name: mongodb3
+    hostname: mongodb3
+    command: --port 25017 --keyFile /data/keyfile.key --bind_ip_all --replSet main
+    ports: 
+      - '25017:25017'
+    volumes:
+      - ../mongo/keyfile.key:/data/keyfile.key:ro 
+      - ../mongo/dat/arbiter:/data/db:rw
+    networks:
+      - wallet_internal
+    restart: on-failure
+networks:
+  wallet_internal:
+    external: true
