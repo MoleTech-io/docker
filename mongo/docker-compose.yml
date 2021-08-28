@@ -1,7 +1,7 @@
 version: '3.4'
 services:
   mongodb1:
-    image: mongo:4.2.3-bionic
+    image: mongo:5
     hostname: mongodb1
     container_name: mongodb1
     command: --port 25015 --keyFile /data/keyfile.key --bind_ip_all --replSet main 
@@ -18,7 +18,7 @@ services:
         ipv4_address: 10.0.9.5
     restart: on-failure
   mongodb2:
-    image: mongo:4.2.3-bionic
+    image: mongo:5
     container_name: mongodb2
     hostname: mongodb2
     command: --port 25016 --keyFile /data/keyfile.key --bind_ip_all --replSet main
@@ -32,7 +32,7 @@ services:
         ipv4_address: 10.0.9.6
     restart: on-failure
   mongodb3:
-    image: mongo:4.2.3-bionic
+    image: mongo:5
     container_name: mongodb3
     hostname: mongodb3
     command: --port 25017 --keyFile /data/keyfile.key --bind_ip_all --replSet main

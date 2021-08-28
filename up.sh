@@ -52,6 +52,28 @@ initRedisReplica(){
     echo "redis cluster is created"
 }
 
+statusMongoReplica(){
+    if grep -q "mongodb1" /etc/hosts; then
+        echo "mongodb1 exists in /etc/hosts ok!"
+    else
+        echo "127.0.0.1 mongodb1" >> /etc/hosts;
+    fi
+    
+    if grep -q "mongodb2" /etc/hosts; then
+        echo "mongodb2 exists in /etc/hosts ok!"
+    else
+        echo "127.0.0.1 mongodb2" >> /etc/hosts;
+    fi
+
+    if grep -q "mongodb3" /etc/hosts; then
+        echo "mongodb3 exists in /etc/hosts ok!"
+    else
+        echo "127.0.0.1 mongodb3" >> /etc/hosts;
+    fi
+    mongo mongodb://mongodb1:25015 $DIR/mongo/replica-status.js
+    mongo mongodb://mongodb2:25016 $DIR/mongo/replica-status.js
+}
+
 # execute
 if [  "$1" = 'network' ] && [  "$2" = 'list' ]  ; then
     docker network inspect wallet_internal list
@@ -83,7 +105,10 @@ if [  "$1" = 'all' ]  ; then
     initNetWork
     startMongo
     startRedis
+    sleep 2
     initRedisReplica
+    sleep 8
+    statusMongoReplica
     # startStone
     exit
 fi

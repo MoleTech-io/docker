@@ -1,7 +1,7 @@
 version: '3.4'
 services:
   mongodb1:
-    image: mongo:4.2.3-bionic
+    image: mongo:5
     hostname: mongodb1
     container_name: mongodb1
     command: --port 25015  --bind_ip_all --replSet main 
@@ -13,7 +13,7 @@ services:
       - wallet_internal
     restart: on-failure
   mongodb2:
-    image: mongo:4.2.3-bionic
+    image: mongo:5
     container_name: mongodb2
     hostname: mongodb2
     command: --port 25016 --bind_ip_all --replSet main
@@ -25,7 +25,7 @@ services:
       - wallet_internal
     restart: on-failure
   mongodb3:
-    image: mongo:4.2.3-bionic
+    image: mongo:5
     container_name: mongodb3
     hostname: mongodb3
     command: --port 25017 --bind_ip_all --replSet main
