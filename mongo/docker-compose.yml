@@ -14,7 +14,8 @@ services:
       - ../mongo/keyfile.key:/data/keyfile.key:ro 
       - ../mongo/dat/primary:/data/db:rw
     networks:
-      - wallet_internal
+      wallet_internal:
+        ipv4_address: 10.0.9.5
     restart: on-failure
   mongodb2:
     image: mongo:4.2.3-bionic
@@ -27,7 +28,8 @@ services:
       - ../mongo/keyfile.key:/data/keyfile.key:ro 
       - ../mongo/dat/secondary:/data/db:rw
     networks:
-      - wallet_internal
+      wallet_internal:
+        ipv4_address: 10.0.9.6
     restart: on-failure
   mongodb3:
     image: mongo:4.2.3-bionic
@@ -40,7 +42,8 @@ services:
       - ../mongo/keyfile.key:/data/keyfile.key:ro 
       - ../mongo/dat/arbiter:/data/db:rw
     networks:
-      - wallet_internal
+      wallet_internal:
+        ipv4_address: 10.0.9.7
     restart: on-failure
 networks:
   wallet_internal:

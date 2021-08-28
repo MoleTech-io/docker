@@ -13,7 +13,7 @@ initNetWork(){
     sleep 3
     docker network create --driver=overlay --attachable wallet_internal --subnet=10.0.9.0/24
     sleep 1
-    docker network create --driver=overlay --attachable wallet_service
+    docker network create --driver=overlay --attachable wallet_service --subnet=10.0.10.0/24
     sleep 1
     # check docker network status
     docker network ls 
@@ -47,6 +47,12 @@ startRedis(){
 }
 
 # execute
+if [  "$1" = 'network' ] && [  "$2" = 'list' ]  ; then
+    docker network inspect wallet_internal list
+    docker network inspect wallet_service list
+    exit
+fi
+
 if [  "$1" = 'network' ]  ; then
     initNetWork
     exit
@@ -63,6 +69,14 @@ if [  "$1" = 'stone' ]  ; then
 fi
 
 if [  "$1" = 'redis' ]  ; then
+    startRedis
+    exit
+fi
+
+if [  "$1" = 'all' ]  ; then
+    initNetWork
+    startMongo
+    startStone
     startRedis
     exit
 fi

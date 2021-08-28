@@ -43,7 +43,8 @@ services:
       - "3838:3838"
     restart: always
     networks:
-      - wallet_internal
+      wallet_internal:
+        ipv4_address: 10.0.9.15
     environment:
       NODE_ENV: test
   socketio:
@@ -55,7 +56,8 @@ services:
       - "38385:38385"
     restart: on-failure
     networks:
-      - wallet_internal
+      wallet_service:
+        ipv4_address: 10.0.10.4
     environment:
       NODE_ENV: test
   future:
@@ -67,8 +69,10 @@ services:
       - "1380:1380"
     restart: on-failure
     networks:
-      - wallet_internal
-      - wallet_service
+      wallet_internal:
+        ipv4_address: 10.0.9.14
+      wallet_service:
+        ipv4_address: 10.0.10.3
     links:
       - stone
       - socketio
