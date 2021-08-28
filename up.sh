@@ -46,6 +46,12 @@ startRedis(){
     echo "start redis"
 }
 
+initRedisReplica(){
+    docker exec -it redis1 redis-cli --cluster create 10.0.9.8:7000 10.0.9.9:7000 10.0.9.10:7000 10.0.9.11:7000 10.0.9.12:7000 10.0.9.13:7000 --cluster-replicas 1 --cluster-yes
+    docker exec -it redis1 redis-cli -p 7000 cluster nodes
+    echo "redis cluster is created"
+}
+
 # execute
 if [  "$1" = 'network' ] && [  "$2" = 'list' ]  ; then
     docker network inspect wallet_internal list
@@ -76,7 +82,8 @@ fi
 if [  "$1" = 'all' ]  ; then
     initNetWork
     startMongo
-    startStone
     startRedis
+    initRedisReplica
+    # startStone
     exit
 fi
