@@ -135,6 +135,6 @@ if [  "$1" = 'all' ]  ; then
     sleep 20
     initMongoUser
     startMongoWithKey
-    # startStone
+    startStone
     exit
 fi
