@@ -10,7 +10,7 @@ if(isMaster.ismaster){
     db4.createUser(
         {
             user: "bo_admin",
-            pwd: "56795c3ba4b4cb0e131cf588c512e244",
+            pwd: "admin",
             roles: [{
                 role: "dbOwner",
                 db: "bo"
@@ -22,7 +22,7 @@ if(isMaster.ismaster){
     db3.createUser(
         {
             user: "keystone_admin",
-            pwd: "56795c3ba4b4cb0e131cf588c512e244",
+            pwd: "admin",
             roles: [{
                 role: "dbOwner",
                 db: "keystone"
@@ -33,7 +33,7 @@ if(isMaster.ismaster){
     db1.createUser(
         {
             user: "future_admin",
-            pwd: "56795c3ba4b4cb0e131cf588c512e244",
+            pwd: "admin",
             roles: [{
                 role: "dbOwner",
                 db: "future"
@@ -44,7 +44,7 @@ if(isMaster.ismaster){
     db2.createUser(
         {
             user: "insight_admin",
-            pwd: "56795c3ba4b4cb0e131cf588c512e244",
+            pwd: "admin",
             roles: [{
                 role: "dbOwner",
                 db: "insight"

@@ -12,7 +12,7 @@ services:
       - "7000:7000"
     command: redis-server /usr/local/etc/redis/redis.conf
     # environment:
-    #   - REDIS_PASSWORD=56795c3ba4b4cb0e131cf588c512e244
+    #   - REDIS_PASSWORD=admin
     networks:
       wallet_internal:
         ipv4_address: 10.0.9.8
@@ -27,7 +27,7 @@ services:
       - "7001:7000"
     command: redis-server /usr/local/etc/redis/redis.conf
     # environment:
-    #   - REDIS_PASSWORD=56795c3ba4b4cb0e131cf588c512e244
+    #   - REDIS_PASSWORD=admin
     networks:
       wallet_internal:
         ipv4_address: 10.0.9.9
@@ -42,7 +42,7 @@ services:
       - "7002:7000"
     command: redis-server /usr/local/etc/redis/redis.conf
     # environment:
-    #   - REDIS_PASSWORD=56795c3ba4b4cb0e131cf588c512e244
+    #   - REDIS_PASSWORD=admin
     networks:
       wallet_internal:
         ipv4_address: 10.0.9.10
@@ -57,7 +57,7 @@ services:
       - "7003:7000"
     command: redis-server /usr/local/etc/redis/redis.conf
     # environment:
-    #   - REDIS_PASSWORD=56795c3ba4b4cb0e131cf588c512e244
+    #   - REDIS_PASSWORD=admin
     networks:
       wallet_internal:
         ipv4_address: 10.0.9.11
@@ -72,7 +72,7 @@ services:
       - "7004:7000"
     command: redis-server /usr/local/etc/redis/redis.conf
     # environment:
-    #   - REDIS_PASSWORD=56795c3ba4b4cb0e131cf588c512e244
+    #   - REDIS_PASSWORD=admin
     networks:
       wallet_internal:
         ipv4_address: 10.0.9.12
@@ -87,7 +87,7 @@ services:
       - "7005:7000"
     command: redis-server /usr/local/etc/redis/redis.conf
     # environment:
-    #   - REDIS_PASSWORD=56795c3ba4b4cb0e131cf588c512e244
+    #   - REDIS_PASSWORD=admin
     networks:
       wallet_internal:
         ipv4_address: 10.0.9.13

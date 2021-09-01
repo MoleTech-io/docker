@@ -59,42 +59,42 @@ services:
       wallet_internal:
         ipv4_address: 10.0.9.16
     environment:
-      dbcon: mongodb://bo_admin:56795c3ba4b4cb0e131cf588c512e244@localhost:25015,localhost:25016,localhost:25017/bo?replicaSet=main
-      future: mongodb://future_admin:56795c3ba4b4cb0e131cf588c512e244@localhost:25015,localhost:25016,localhost:25017/future?replicaSet=main
+      dbcon: mongodb://bo_admin:admin@mongodb1:25015,mongodb2:25016,mongodb3:25017/bo?replicaSet=main
+      future: mongodb://future_admin:admin@mongodb1:25015,mongodb2:25016,mongodb3:25017/future?replicaSet=main
       init_user: super_admin
       init_password: super_admin
       NODE_ENV: dev
-  socketio:
-    container_name: socketio
-    image: socketio:latest
-    volumes:
-      - "../../log/socketio:/data/log"
-    ports:
-      - "38385:38385"
-    restart: on-failure
-    networks:
-      wallet_service:
-        ipv4_address: 10.0.10.4
-    environment:
-      NODE_ENV: test
-  future:
-    container_name: future
-    image: future:latest
-    volumes:
-      - "../../log/future:/data/log"
-    ports:
-      - "1380:1380"
-    restart: on-failure
-    networks:
-      wallet_internal:
-        ipv4_address: 10.0.9.14
-      wallet_service:
-        ipv4_address: 10.0.10.3
-    links:
-      - stone
-      - socketio
-    environment:
-      NODE_ENV: test
+  # socketio:
+  #   container_name: socketio
+  #   image: socketio:latest
+  #   volumes:
+  #     - "../../log/socketio:/data/log"
+  #   ports:
+  #     - "38385:38385"
+  #   restart: on-failure
+  #   networks:
+  #     wallet_service:
+  #       ipv4_address: 10.0.10.4
+  #   environment:
+  #     NODE_ENV: test
+  # future:
+  #   container_name: future
+  #   image: future:latest
+  #   volumes:
+  #     - "../../log/future:/data/log"
+  #   ports:
+  #     - "1380:1380"
+  #   restart: on-failure
+  #   networks:
+  #     wallet_internal:
+  #       ipv4_address: 10.0.9.14
+  #     wallet_service:
+  #       ipv4_address: 10.0.10.3
+  #   links:
+  #     - stone
+  #     - socketio
+  #   environment:
+  #     NODE_ENV: test
 networks:
   wallet_internal:
     external: true
