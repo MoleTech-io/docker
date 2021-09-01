@@ -46,7 +46,24 @@ services:
       wallet_internal:
         ipv4_address: 10.0.9.15
     environment:
-      NODE_ENV: test
+      NODE_ENV: dev
+  bo:
+    container_name: bo
+    image: bo:latest
+    volumes:
+      - "../../log/bo:/data/log"
+    ports:
+      - "6060:6060"
+    restart: always
+    networks:
+      wallet_internal:
+        ipv4_address: 10.0.9.16
+    environment:
+      dbcon: mongodb://bo_admin:56795c3ba4b4cb0e131cf588c512e244@localhost:25015,localhost:25016,localhost:25017/bo?replicaSet=main
+      future: mongodb://future_admin:56795c3ba4b4cb0e131cf588c512e244@localhost:25015,localhost:25016,localhost:25017/future?replicaSet=main
+      init_user: super_admin
+      init_password: super_admin
+      NODE_ENV: dev
   socketio:
     container_name: socketio
     image: socketio:latest

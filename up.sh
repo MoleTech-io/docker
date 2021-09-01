@@ -41,6 +41,14 @@ startStone(){
     echo "start stone"
 }
 
+startBo(){
+    if [[ "$(docker images -q bo:latest 2> /dev/null)" == "" ]]; then
+        docker build -t bo $(dirname "$DIR")/bo/
+    fi
+    docker-compose -f $DIR/insight/docker-compose.yml up -d bo
+    echo "start bo"
+}
+
 startRedis(){
     docker-compose -f $DIR/redis/docker-compose.yml up -d
     echo "start redis"
@@ -136,5 +144,6 @@ if [  "$1" = 'all' ]  ; then
     initMongoUser
     startMongoWithKey
     startStone
+    startBo
     exit
 fi

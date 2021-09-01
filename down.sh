@@ -30,6 +30,11 @@ removeStone(){
     echo "remove stone"
 }
 
+removeBo(){
+    docker rm -f bo
+    echo "remove bo"
+}
+
 removeNetwork(){
     docker swarm leave --force
     docker network remove wallet_internal
@@ -82,6 +87,11 @@ if [  "$1" = 'stone' ]  ; then
     exit
 fi
 
+if [  "$1" = 'bo' ]  ; then
+    removeBo
+    exit
+fi
+
 if [  "$1" = 'data' ]  ; then
     removeData
     exit
@@ -93,5 +103,6 @@ if [  "$1" = 'all' ]  ; then
     removeStone
     removeNetwork
     removeData
+    removeBo
     exit
 fi
