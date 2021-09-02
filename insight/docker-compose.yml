@@ -46,7 +46,7 @@ services:
       wallet_internal:
         ipv4_address: 10.0.9.15
     environment:
-      NODE_ENV: dev
+      NODE_ENV: test
   bo:
     container_name: bo
     image: bo:latest
@@ -63,7 +63,7 @@ services:
       future: mongodb://future_admin:admin@mongodb1:25015,mongodb2:25016,mongodb3:25017/future?replicaSet=main
       init_user: super_admin
       init_password: super_admin
-      NODE_ENV: dev
+      NODE_ENV: test
   # socketio:
   #   container_name: socketio
   #   image: socketio:latest

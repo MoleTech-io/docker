@@ -46,12 +46,6 @@ removeNetwork(){
 removeData() {
     rm -rf $DIR/mongo/dat/
     echo " remove datas from $DIR/mongo/dat/"
-    rm -rf $DIR/zookeeper/zoo1/
-    echo " remove datas from $DIR/zookeeper/zoo1/"
-    rm -rf $DIR/zookeeper/zoo2/
-    echo " remove datas from $DIR/zookeeper/zoo1/"
-    rm -rf $DIR/zookeeper/zoo3/
-    echo " remove datas from $DIR/zookeeper/zoo3/"
 
     rm -rf $DIR/redis/dat/redis1/ 
     echo " remove data from $DIR/redis/dat/redis1/"
