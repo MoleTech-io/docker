@@ -1,9 +1,8 @@
 #! /bin/bash
 if [ -z "$1" ] ;then
 echo "help command:"
-echo "./down.sh redis"
-echo "./down.sh mongo"
-echo "./down.sh stone"
+echo "./down.sh all"
+
 exit
 fi
 

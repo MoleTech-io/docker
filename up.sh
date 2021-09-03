@@ -2,9 +2,7 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 if [ -z "$1" ] ;then
 echo "help command:"
-echo "./up.sh network"
-echo "./up.sh mongo"
-echo "./up.sh redis"
+echo "./up.sh all"
 exit
 fi
 
